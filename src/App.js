@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import './App.css';
-import { CategoryScale, LinearScale ,Chart , ArcElement, PointElement, LineElement } from 'chart.js'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import {
+	Chart as ChartJS,
+	CategoryScale,
+	LinearScale,
+	PointElement,
+	LineElement,ArcElement,
+	Title,
+	Tooltip,
+	Legend,
+  } from 'chart.js';
 import { Container, Row, Col, Form, FormGroup,FormControl, OverlayTrigger, FormLabel, Button, Table } from 'react-bootstrap'
 import { Line, Pie } from 'react-chartjs-2' ;
 
-Chart.register(CategoryScale);
-Chart.register(LinearScale);
-Chart.register(ArcElement);
-Chart.register(PointElement);
-Chart.register(LineElement);
-
+ChartJS.register(
+	CategoryScale,
+	LinearScale,
+	PointElement,ArcElement,
+	LineElement,
+	Title,
+	Tooltip,
+	Legend
+  );
 
 class App extends Component {
 	constructor(props){
@@ -81,16 +92,12 @@ class App extends Component {
 				labels:['Win Trades','Loss Trades'],
 				datasets:[
 					{
+						label:'Win Loss Repartition',
 						data:[nbWin,nbLoss],
-						borderColor:["cyan","red"],
+						borderColor:["wheat"],
 						backgroundColor:["cyan","red"]
 					}
-				],
-				options : {
-					labels:{
-						fontColor:"white"
-					}
-				}
+				]
 			}
 		});
 	}
@@ -114,29 +121,34 @@ class App extends Component {
 				labels : labelsGeneratedLine,
 				datasets :[
 						{
-							data : datasGeneratedLine,
 							label:'Capital Evolution',
-							borderColor:colorBoard,
+							data : datasGeneratedLine,
+							borderColor:"wheat",
 							backgroundColor:"white"
 						}
-					],
-					options : {
-						labels:{
-							fontColor:"white"
-						}
-					}
+					]
 			}
 		});
 	}
 
 	render(){
+
+		const lineOptions = {
+			labels:{
+				fontColor:"white"
+			}
+		}
+		const pieOptions = {
+			labels:{
+				fontColor:"white"
+			}
+		}
+
 		return (
-			<Container  className="">
-				<Row className="justify-content-center">
-					<h1>Gain Potential</h1>	
-				</Row>
-				<Row className="justify-content-center">
-					<p>Projections of Gains related to your Own trading level.</p>
+			<Container className="">
+				<Row className="justify-content-center" style={{textAlign:"center"}}>
+						<h1>Gain Potential V 1.0</h1>
+						<p>Projections of Gains related to your Own trading level.</p>
 				</Row>
 				<Row className="justify-content-center">
 					<Col className="" md="4">
@@ -144,23 +156,23 @@ class App extends Component {
 						<Form>
 							<FormGroup controlId="simulationNumbers" >
 								<p>
-									<OverlayTrigger placement="auto" overlay={<p style={{background:"wheat",color:"black"}}>How much Starting capital<br/> You want to invest?</p>}>
-									<FormControl type="number" step="50" min="0" value={this.state.capDep} onChange={this.handleChangeCapDep} placeholder="Starting Capital" /> 
+									<OverlayTrigger placement="right" overlay={<p style={{background:"wheat",color:"black"}}>How much Starting capital<br/> You want to invest?</p>}>
+										<FormControl type="number" step="50" min="0" value={this.state.capDep} onChange={this.handleChangeCapDep} placeholder="Starting Capital" /> 
 									</OverlayTrigger>
 									
 								</p>
 								<p>
-									<OverlayTrigger placement="auto" overlay={<p style={{background:"wheat",color:"black"}}>How much of the capital<br/> each day you want to win or lose?</p>}>
-										<FormControl value={this.state.GainRate} min="0" onChange={this.handleChangeGainRate} type="number" placeholder="Money Management" /> 
+									<OverlayTrigger placement="right" overlay={<p style={{background:"wheat",color:"black"}}>How much of the capital<br/> each day you want to win or lose?</p>}>
+										<FormControl value={this.state.GainRate} min="0" onChange={this.handleChangeGainRate} type="number"  placeholder="Money Management" /> 
 									</OverlayTrigger>
 								</p>
 								<p>
-									  <OverlayTrigger placement="auto" overlay={<p style={{background:"wheat",color:"black"}}>On hom many months do you want <br/>the simulation to run?</p>}>
-										<FormControl type="number" min="0" value={this.state.period} onChange={this.handleChangePeriod} placeholder="Simulation Period" /> 
+									  <OverlayTrigger placement="right" overlay={<p style={{background:"wheat",color:"black"}}>On hom many months do you want <br/>the simulation to run?</p>}>
+										<FormControl type="number" min="0" value={this.state.period} onChange={this.handleChangePeriod} max={24} placeholder="Simulation Period" /> 
 									</OverlayTrigger>
 								</p>
 								<p>
-									  <OverlayTrigger placement="auto" overlay={
+									  <OverlayTrigger placement="right" overlay={
 										<p style={{background:"wheat",color:"black"}}> 
 											Bronze Win about 20% of your trades<br/>
 											Silver Win about 30% of your trades<br/>
@@ -185,12 +197,12 @@ class App extends Component {
 								</p>
 								<p className="card" style={{textAlign:"center",color:"black"}}>
 									<FormLabel id="RangeValue">Number of trading days in the month : {this.state.nbDayTrade} </FormLabel>
-									  <OverlayTrigger placement="auto" overlay={<p style={{background:"wheat",color:"black"}}>Lets Go with 20 days max as Markets are closed the week-ends</p>}>
+									  <OverlayTrigger placement="right" overlay={<p style={{background:"wheat",color:"black"}}>Lets Go with 20 days max as Markets are closed the week-ends</p>}>
 										<FormControl value={this.state.nbDayTrade} style={{background:"wheat"}} onChange={this.handleChangeNbDayTrade} type="range" min="0" max="20" placeholder="Simulation Period" /> 
 									</OverlayTrigger>
 								</p>
 								<p className="">
-									<OverlayTrigger placement="auto" overlay={<p style={{background:"wheat",color:"black"}}>Do you Add to your Capital Monthly From <br/> other income Source in your Trading Capital?</p>}>
+									<OverlayTrigger placement="right" overlay={<p style={{background:"wheat",color:"black"}}>Do you Add to your Capital Monthly From <br/> other income Source in your Trading Capital?</p>}>
 										<FormControl type="number" min="0" value={this.state.apport} onChange={this.handleChangeIntake} step="50" placeholder="Mensual Intake" /> 
 									</OverlayTrigger>
 								</p>
@@ -207,14 +219,14 @@ class App extends Component {
 						<Row>
 							<Col>
 								{
-									this.state.simulationDone ? <Line data={this.state.datasLine} /> : ""
+									this.state.simulationDone ? <Line options={lineOptions} data={this.state.datasLine} /> : ""
 								}								
 							</Col>
 						</Row>
 						<Row>
 							<Col>	
 									{
-									this.state.simulationDone ? <Pie data={this.state.datasPie} /> : ""
+									this.state.simulationDone ? <Pie options={pieOptions} data={this.state.datasPie} /> : ""
 									}	
 								
 							</Col>
@@ -225,7 +237,7 @@ class App extends Component {
 							this.state.simulationDone ? 
 							<Row className="justify-content-center">
 								<Col md={12}><h1 style={{textAlign:"center",color:"wheat"}}>Simulation Day by Day</h1></Col>
-								<Table >
+								<Table striped bordered hover variant>
 									<tr style={{color:"wheat"}}><td>Month</td> <td>Day</td><td>Current Capital $</td> <td>Probability</td> <td> Win or Loss </td>  </tr>
 									{
 										this.state.ArrayToSend.map( (tuple) => 
