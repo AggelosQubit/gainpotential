@@ -1,7 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-The mail url to test the simulation should be : <a href="https://gainpotential.netlify.app/" >Gain Potential</a>
+The mail url to test the simulation should be : <a href="https://aggelos-pg.netlify.app/" >Gain Potential</a>
 
 ## Available Scripts
 
