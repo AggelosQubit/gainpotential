@@ -20,3 +20,18 @@ p{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+.parallax{
+    /*Parallax Effect*/
+    min-height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.blank_row
+{
+    background-color: #FFFFFF;
+}

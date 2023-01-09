@@ -150,7 +150,7 @@ class App extends Component {
 						<h1>Gain Potential V 1.0</h1>
 						<p>Projections of Gains related to your Own trading level.</p>
 				</Row>
-				<Row className="justify-content-center">
+				<Row className="justify-content-center parallax">
 					<Col className="" md="4">
 						<h1>Settings</h1>
 						<Form>
@@ -234,35 +234,76 @@ class App extends Component {
 					</Col>
 				</Row>
 				{
-							this.state.simulationDone ? 
-							<Row className="justify-content-center">
-								<Col md={12}><h1 style={{textAlign:"center",color:"wheat"}}>Simulation Day by Day</h1></Col>
-								<Table striped bordered hover variant>
-									<tr style={{color:"wheat"}}><td>Month</td> <td>Day</td><td>Current Capital $</td> <td>Probability</td> <td> Win or Loss </td>  </tr>
-									{
-										this.state.ArrayToSend.map( (tuple) => 
-											tuple[4]==="WIN" ?
-													<tr className="primary" style={{color:"blue"}}>
-														<td>{tuple[0]}</td>
-														<td>{tuple[1]}</td>
-														<td>{tuple[2]}</td>
-														<td>{tuple[3]}</td>
-														<td>{tuple[4]}</td>
-													</tr>
-												:	
-													<tr className="primary" style={{color:"red"}}>
-														<td>{tuple[0]}</td>
-														<td>{tuple[1]}</td>
-														<td>{tuple[2]}</td>
-														<td>{tuple[3]}</td>
-														<td>{tuple[4]}</td>
-													</tr>
-										)
-									}
-								</Table>
-							</Row>
-							: ""
-						}
+					this.state.simulationDone ? 
+					<Row className="justify-content-center">
+						<Col md={12}><h1 style={{textAlign:"center",color:"wheat"}}>Simulation Day by Day</h1></Col>
+						<Table striped bordered hover variant>
+							<tr style={{color:"wheat"}}><td>N° Day Traded</td><td>Month</td><td>Current Capital $</td> <td>Probability</td> <td> Win or Loss </td>  </tr>
+							{
+								this.state.ArrayToSend.map( (tuple,index) => 
+									(	tuple[4]==="WIN" ?
+											index%this.state.nbDayTrade===0?
+												<tr className="bg-light" style={{color:"blue"}}>
+													<td>Jour #{ index+1 }</td>
+													<td>{tuple[0]}</td>
+													<td>{tuple[2]}</td>
+													<td>{tuple[3]}</td>
+													<td>{tuple[4]}</td>
+												</tr>
+											:
+												<tr className="primary" style={{color:"blue"}}>
+													<td>Jour #{ index+1 }</td>
+													<td>{tuple[0]}</td>
+													<td>{tuple[2]}</td>
+													<td>{tuple[3]}</td>
+													<td>{tuple[4]}</td>
+												</tr>
+										:	
+											index%this.state.nbDayTrade===0?
+												<tr className="bg-light" style={{color:"red"}}>
+													<td>Jour #{ index+1 }</td>
+													<td>{tuple[0]}</td>
+													<td>{tuple[2]}</td>
+													<td>{tuple[3]}</td>
+													<td>{tuple[4]}</td>
+												</tr>
+											:
+												<tr className="primary" style={{color:"red"}}>
+													<td>Jour #{ index+1 }</td>
+													<td>{tuple[0]}</td>
+													<td>{tuple[2]}</td>
+													<td>{tuple[3]}</td>
+													<td>{tuple[4]}</td>
+												</tr>
+									)
+								)
+							}
+						</Table>
+					</Row>
+					: ""
+				}
+				<div class="py-3 bg-dark text-white">
+					<div class="row">
+						<div class="col-md-4 offset-md-1 text-center text-md-left">
+							<p class="mb-0">Copyright &copy; AggelosQubit 2022</p>
+						</div>
+						<div class="col-md-2 text-center text-md-right">
+							<a href="https://github.com/AggelosQubit" class="text-white" target="_blank">
+								<i class="fab fa-github mr-2"></i>GitHub
+							</a>
+						</div>
+						<div class="col-md-2 text-center text-md-right">
+							<a href="https://drum.io/aggelosqubit" class="text-white" target="_blank">
+								<i class="fab fa-github mr-2"></i>Drum Page
+							</a>
+						</div>
+						<div class="col-md-2 text-center text-md-right">
+							<a href="https://www.instagram.com/theintrovertedprogrammer/" class="text-white" target="_blank">
+								<i class="fab fa-github mr-2"></i>Instagram
+							</a>
+						</div>
+					</div>
+				</div>
 			</Container>
 		);
 	}
