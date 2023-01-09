@@ -288,17 +288,17 @@ class App extends Component {
 							<p class="mb-0">Copyright &copy; AggelosQubit 2022</p>
 						</div>
 						<div class="col-md-2 text-center text-md-right">
-							<a href="https://github.com/AggelosQubit" class="text-white" target="_blank">
+							<a href="https://github.com/AggelosQubit" class="text-white" >
 								<i class="fab fa-github mr-2"></i>GitHub
 							</a>
 						</div>
 						<div class="col-md-2 text-center text-md-right">
-							<a href="https://drum.io/aggelosqubit" class="text-white" target="_blank">
-								<i class="fab fa-github mr-2"></i>Drum Page
+							<a href="https://drum.io/aggelosqubit" class="text-white">
+								<i class="fab fa-github mr-2"></i> Drum Page
 							</a>
 						</div>
 						<div class="col-md-2 text-center text-md-right">
-							<a href="https://www.instagram.com/theintrovertedprogrammer/" class="text-white" target="_blank">
+							<a href="https://www.instagram.com/theintrovertedprogrammer/" class="text-white" >
 								<i class="fab fa-github mr-2"></i>Instagram
 							</a>
 						</div>
